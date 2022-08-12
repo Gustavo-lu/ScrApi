@@ -24,4 +24,4 @@ def findCoin(id:int):
     
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="MTZNOTFS051600", port=3333) 
+    uvicorn.run(app, host="IP Host", port="Port") 
