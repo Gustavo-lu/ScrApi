@@ -45,10 +45,7 @@ Esse projeto tem como intuito fazer a utilização da raspagem de dados da web e
 
 Para executar esse projeto será necessário as seguintes bibliotecas:
 
-```bash
-  pip install requests 
 
-```
 ```bash
   pip install requests
 ```
