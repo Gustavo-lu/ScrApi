@@ -82,4 +82,4 @@ Em seguida é só consumir 😉
 
 ## LinkedIn
 
- - [Gustavo Lu](www.linkedin.com/in/gustavo-lu-6b9236217)
+[link]www.linkedin.com/in/gustavo-lu-6b9236217
