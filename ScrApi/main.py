@@ -1,8 +1,13 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware 
+from fastapi.responses import HTMLResponse
 import uvicorn 
 from functions import getCoin
-from config import ip, port
+import socket
+from index import indexHtml
+
+
+
 
 app = FastAPI(
     title="ScrApi 🕷️",
@@ -17,9 +22,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-@app.get("/")
+@app.get("/",response_class=HTMLResponse)
 def init():
-    return({"msg":"Api de raspagem rodando, acesse a Rota /scrapi/coin/id"})
+    return(indexHtml)
 
 @app.get("/scrapi/coin/{id}",tags=["Buscar cotação da moeda"])
 def findCoin(id:int):
@@ -27,4 +32,4 @@ def findCoin(id:int):
     
 
 if __name__ == "__main__":
-    uvicorn.run(app, host=ip, port=port) 
+    uvicorn.run(app, host=socket.gethostbyname(socket.gethostname()), port=3000) 

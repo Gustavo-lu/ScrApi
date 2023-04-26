@@ -1,28 +1,40 @@
 import requests
 from bs4 import BeautifulSoup
-from list_ import coin
+
+
+COIN_LINKS = {
+    "dolar": "cotacao-dolar",
+    "euro": "cotacao-euro",
+    "libra": "cotacao-libra-esterlina",
+    "dolar australiano": "cotacao-dolar-australiano",
+    "dolar canadense": "cotacao-dolar-canadense",
+    "franco suico": "cotacao-franco-suico",
+    "iene japones": "cotacao-iene-japones",
+    "peso argentino": "cotacao-peso-argentino",
+    "novo sol": "cotacao-novo-sol",
+    "boliviano": "cotacao-boliviano",
+    "yuan chines": "cotacao-yuan-chines",
+    "peso uruguaio": "cotacao-peso-uruguaio",
+    "dolar singapura": "cotacao-dolar-singapura",
+    "lira turca": "cotacao-lira-turca",
+    "dolar hong kong": "cotacao-dolar-hong-kong",
+}
 
 
 def getCoin(id):
+    if id < 0 or id >= len(COIN_LINKS):
+        return {"error": "Moeda não encontrada"}
 
-        totalindex = (len(coin)-1)
-        
-        if id>totalindex:
-                return({"error":"Moeda não encontrada"})
-        elif id<0:
-                return({"error":"Moeda não encontrada"})
-        try:
-                Cotalink=coin[id]
-                url='https://www.remessaonline.com.br/cotacao/'+Cotalink+''
-                page = requests.get(url)
-                soup = BeautifulSoup(page.text, 'html.parser')
-                htmlNamecoin=soup.find_all('h1',class_ = "style__Title-sc-1a6mtr6-1 dUJopL")[0].get_text()
-                name=htmlNamecoin.replace(" hoje",'')
-                htmlpage=soup.find_all('div',class_ = "style__Text-sc-1a6mtr6-2 ljisZu")[0].get_text()
-                Value=htmlpage.replace(' Reais','')
-                CoinReplaceDot = Value.replace(',','.')
-                CoinToFloat=float(CoinReplaceDot) 
-                return({name:CoinToFloat})
-        except:
-                return({"Error":"Não foi possível raspar a cotação dessa moeda"})
+    coin_name = list(COIN_LINKS.keys())[id]
+    coin_link = COIN_LINKS[coin_name]
+    url = f"https://www.remessaonline.com.br/cotacao/{coin_link}"
 
+    try:
+        page = requests.get(url)
+        soup = BeautifulSoup(page.text, "html.parser")
+        name = soup.find("h1", class_="style__Title-sc-1a6mtr6-1 dUJopL").get_text().replace(" hoje", "")
+        value = soup.find("div", class_="style__Text-sc-1a6mtr6-2 ljisZu").get_text().replace(" Reais", "").replace(",", ".")
+        value_float = float(value)
+        return {name: value_float}
+    except:
+        return {"error": "Não foi possível raspar a cotação dessa moeda"}
