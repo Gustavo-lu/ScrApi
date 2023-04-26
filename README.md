@@ -42,31 +42,9 @@ Esse projeto tem como intuito fazer a utilização da raspagem de dados da web e
 }
 ```
 ## Instalação
-
-Para executar esse projeto será necessário as seguintes bibliotecas:
-
-
+Para executar esse projeto será necessário a instalação das bibliotecas:
 ```bash
-  pip install requests
-```
-
-```bash
-  pip install beautifulsoup4
-```
-
-```bash
-  pip install fastapi
-```
-
-```bash
-  pip install uvicorn
-```
-## Rodando localmente
-No arquivo Config.py Você tem as variáveis a qual irá informar o Host
-
-```bash
-ip="IP" 
-port=PORTA "Lembrando que deve ser Int" 
+python install requeriments.txt
 ```
 ### Executando inicialização o projeto
 No diretório da aplicação execute esse comando em seu terminal:
