@@ -1,5 +1,3 @@
-import socket
-host = socket.gethostbyname(socket.gethostname())
 indexHtml = """
 <!DOCTYPE html>
 <html>
